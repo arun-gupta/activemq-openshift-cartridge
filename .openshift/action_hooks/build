@@ -24,6 +24,6 @@ fi
 
 # Start ActiveMQ
 echo "Starting ActiveMQ ..." >> ${OPENSHIFT_DIY_LOG_DIR}/start.log 2>&1 
-$ACTIVEMQ/bin/linux-x86-64/activemq > $OPENSHIFT_DIY_LOG_DIR/activemq-server.log 2>&1 &
+$ACTIVEMQ/bin/linux-x86-64/activemq start > $OPENSHIFT_DIY_LOG_DIR/activemq-server.log 2>&1 &
 echo "ActiveMQ done." >> ${OPENSHIFT_DIY_LOG_DIR}/start.log 2>&1 
 
