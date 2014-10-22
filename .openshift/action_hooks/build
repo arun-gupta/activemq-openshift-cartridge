@@ -1,0 +1,29 @@
+#!/bin/bash
+ACTIVEMQ=apache-activemq-5.10.0
+ACTIVEMQ_JAR=$ACTIVEMQ.jar
+
+date >> ${OPENSHIFT_DIY_LOG_DIR}/build.log 2>&1
+
+set -x 
+
+cd $OPENSHIFT_DATA_DIR
+
+if [ ! -e "$ACTIVEMQ_JAR" ]; then
+	echo "Downloading ActiveMQ..." >> ${OPENSHIFT_DIY_LOG_DIR}/build.log 2>&1 
+	wget http://mirror.tcpdiag.net/apache/activemq/5.10.0/apache-activemq-5.10.0-bin.tar.gz -O $ACTIVEMQ_JAR
+
+	tar xzf $ACTIVEMQ_JAR | tee -a ${OPENSHIFT_DIY_LOG_DIR}/build.log 2>&1 
+
+	echo "Patching the files with $OPENSHIFT_DIY_IP ..." >> ${OPENSHIFT_DIY_LOG_DIR}/build.log 2>&1 
+	sed -i "s/0.0.0.0/$OPENSHIFT_DIY_IP/g" $ACTIVEMQ/conf/*.xml
+
+    echo "Patching done." >> ${OPENSHIFT_DIY_LOG_DIR}/build.log 2>&1 
+fi
+
+#cd $OPENSHIFT_DATA_DIR
+
+# Start ActiveMQ
+echo "Starting ActiveMQ ..." >> ${OPENSHIFT_DIY_LOG_DIR}/start.log 2>&1 
+$ACTIVEMQ/bin/linux-x86-64/activemq > $OPENSHIFT_DIY_LOG_DIR/activemq-server.log 2>&1 &
+echo "ActiveMQ done." >> ${OPENSHIFT_DIY_LOG_DIR}/start.log 2>&1 
+
