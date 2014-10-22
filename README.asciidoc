@@ -9,7 +9,7 @@ This cartridge will download ActiveMQ 5.10.0 and start it.
 +
 [source, text]
 ----
-rhc app-create kaazing diy --from-code=git://github.com/arun-gupta/activemq-openshift-cartridge.git
+rhc app-create activemq diy --from-code=git://github.com/arun-gupta/activemq-openshift-cartridge.git
 ----
 +
 . Create a port-forward from your local machine to your remote server
