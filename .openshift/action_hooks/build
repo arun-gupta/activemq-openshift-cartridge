@@ -10,7 +10,7 @@ cd $OPENSHIFT_DATA_DIR
 
 if [ ! -e "$ACTIVEMQ_JAR" ]; then
 	echo "Downloading ActiveMQ..." >> ${OPENSHIFT_DIY_LOG_DIR}/build.log 2>&1 
-	wget http://mirror.tcpdiag.net/apache/activemq/5.10.0/apache-activemq-5.10.0-bin.tar.gz -O $ACTIVEMQ_JAR
+	wget http://archive.apache.org/dist/activemq/5.10.0/apache-activemq-5.10.0-bin.tar.gz -O $ACTIVEMQ_JAR
 
 	tar xzf $ACTIVEMQ_JAR | tee -a ${OPENSHIFT_DIY_LOG_DIR}/build.log 2>&1 
 
